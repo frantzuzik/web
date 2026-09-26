@@ -1,9 +1,12 @@
 :root {
     --color-bg: #faf7f2;
     --color-text: #2c2c2c;
+    --color-muted: #777;
     --color-accent: #e67e22;
+    --color-card: #ffffff;
     --spacing: 1.5rem;
     --radius: 12px;
+    --max-width: 1200px;
 }
 
 * {
@@ -13,84 +16,207 @@
 }
 
 body {
-    font-family: system-ui, sans-serif;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     background: var(--color-bg);
     color: var(--color-text);
     line-height: 1.5;
 }
 
+/* ---------- Шапка ---------- */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--spacing);
     background: #fff;
     border-bottom: 1px solid #eee;
 }
 
+.header__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1rem var(--spacing);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
 .nav-list {
     display: flex;
-    gap: 1rem;
+    gap: 1.25rem;
     list-style: none;
 }
 
 .nav-list a {
     color: var(--color-text);
     text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-list a:hover {
+    color: var(--color-accent);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem var(--spacing) 2rem;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin-bottom: 0.75rem;
+}
+
+.hero p {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+}
+
+/* ---------- Заголовки секций ---------- */
+.section-title {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ---------- Карточки ---------- */
+.recipes {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2rem var(--spacing);
 }
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: var(--spacing);
-    padding: var(--spacing);
 }
 
 .card {
-    background: #fff;
+    background: var(--color-card);
     border-radius: var(--radius);
-    padding: var(--spacing);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
 }
 
 .card img {
     width: 100%;
     height: 180px;
     object-fit: cover;
-    border-radius: var(--radius);
+    display: block;
+}
+
+.card__body {
+    padding: var(--spacing);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.card__body h3 {
+    font-size: 1.15rem;
+}
+
+.card__body p {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+.card-props {
+    list-style: none;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* ---------- Форма ---------- */
+.search {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem var(--spacing);
 }
 
 .search-form {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    max-width: 400px;
+    gap: 1rem;
+    background: #fff;
     padding: var(--spacing);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.form-field label {
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
 .search-form input,
-.search-form select,
-.search-form button {
+.search-form select {
     padding: 0.75rem;
     font-size: 1rem;
     border-radius: 8px;
     border: 1px solid #ccc;
+    font-family: inherit;
 }
 
 .search-form button {
+    padding: 0.85rem;
+    font-size: 1rem;
+    font-weight: 600;
     background: var(--color-accent);
     color: #fff;
     border: none;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background 0.2s ease;
 }
 
+.search-form button:hover {
+    background: #cf6a12;
+}
+
+/* ---------- О проекте ---------- */
+.about {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem var(--spacing) 3rem;
+    text-align: center;
+}
+
+.about p {
+    color: var(--color-muted);
+}
+
+/* ---------- Подвал ---------- */
 .footer {
     padding: var(--spacing);
     text-align: center;
     font-size: 0.9rem;
-    color: #777;
+    color: var(--color-muted);
+    border-top: 1px solid #eee;
+    background: #fff;
 }
 
+/* ---------- Фокус ---------- */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
