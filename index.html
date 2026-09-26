@@ -9,14 +9,16 @@
 <body>
 
     <header class="header">
-        <div class="logo">РецептБокс</div>
-        <nav class="nav">
-            <ul class="nav-list">
-                <li><a href="#recipes">Рецепты</a></li>
-                <li><a href="#search">Поиск</a></li>
-                <li><a href="#about">О проекте</a></li>
-            </ul>
-        </nav>
+        <div class="header__inner">
+            <div class="logo">РецептБокс</div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#recipes">Рецепты</a></li>
+                    <li><a href="#search">Поиск</a></li>
+                    <li><a href="#about">О проекте</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
@@ -26,43 +28,115 @@
         </section>
 
         <section id="recipes" class="recipes">
-            <h2>Каталог рецептов</h2>
+            <h2 class="section-title">Каталог рецептов</h2>
             <div class="cards">
+
                 <article class="card">
                     <img src="assets/images/carbonara.jpg" alt="Паста карбонара">
-                    <h3>Паста карбонара</h3>
-                    <p>Классика итальянской кухни.</p>
-                    <ul class="card-props">
-                        <li>Время: 25 мин</li>
-                        <li>Сложность: средняя</li>
-                        <li>Кухня: итальянская</li>
-                    </ul>
+                    <div class="card__body">
+                        <h3>Паста карбонара</h3>
+                        <p>Классика итальянской кухни.</p>
+                        <ul class="card-props">
+                            <li>Время: 25 мин</li>
+                            <li>Сложность: средняя</li>
+                            <li>Кухня: итальянская</li>
+                        </ul>
+                    </div>
                 </article>
-                <!-- ещё 5 карточек -->
+
+                <article class="card">
+                    <img src="assets/images/tom-yam.jpg" alt="Том Ям">
+                    <div class="card__body">
+                        <h3>Том Ям</h3>
+                        <p>Острый тайский суп с креветками.</p>
+                        <ul class="card-props">
+                            <li>Время: 40 мин</li>
+                            <li>Сложность: сложная</li>
+                            <li>Кухня: тайская</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img src="assets/images/shakshuka.jpg" alt="Шакшука">
+                    <div class="card__body">
+                        <h3>Шакшука</h3>
+                        <p>Яичница в томатном соусе.</p>
+                        <ul class="card-props">
+                            <li>Время: 20 мин</li>
+                            <li>Сложность: лёгкая</li>
+                            <li>Кухня: ближневосточная</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img src="assets/images/pancakes.jpg" alt="Панкейки">
+                    <div class="card__body">
+                        <h3>Панкейки</h3>
+                        <p>Пышные оладьи на завтрак.</p>
+                        <ul class="card-props">
+                            <li>Время: 15 мин</li>
+                            <li>Сложность: лёгкая</li>
+                            <li>Кухня: американская</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img src="assets/images/borscht.jpg" alt="Борщ">
+                    <div class="card__body">
+                        <h3>Борщ</h3>
+                        <p>Наваристый суп со свёклой.</p>
+                        <ul class="card-props">
+                            <li>Время: 90 мин</li>
+                            <li>Сложность: средняя</li>
+                            <li>Кухня: восточноевропейская</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img src="assets/images/tiramisu.jpg" alt="Тирамису">
+                    <div class="card__body">
+                        <h3>Тирамису</h3>
+                        <p>Десерт без выпечки.</p>
+                        <ul class="card-props">
+                            <li>Время: 30 мин</li>
+                            <li>Сложность: средняя</li>
+                            <li>Кухня: итальянская</li>
+                        </ul>
+                    </div>
+                </article>
+
             </div>
         </section>
 
         <section id="search" class="search">
-            <h2>Найти рецепт</h2>
+            <h2 class="section-title">Найти рецепт</h2>
             <form class="search-form">
-                <label for="query">Название или ингредиент</label>
-                <input type="text" id="query" name="query" placeholder="Например, паста">
+                <div class="form-field">
+                    <label for="query">Название или ингредиент</label>
+                    <input type="text" id="query" name="query" placeholder="Например, паста">
+                </div>
 
-                <label for="time">Время приготовления</label>
-                <select id="time" name="time">
-                    <option value="">Любое</option>
-                    <option value="20">До 20 минут</option>
-                    <option value="40">20–40 минут</option>
-                    <option value="60">Больше 40 минут</option>
-                </select>
+                <div class="form-field">
+                    <label for="time">Время приготовления</label>
+                    <select id="time" name="time">
+                        <option value="">Любое</option>
+                        <option value="20">До 20 минут</option>
+                        <option value="40">20–40 минут</option>
+                        <option value="60">Больше 40 минут</option>
+                    </select>
+                </div>
 
                 <button type="submit">Найти рецепт</button>
             </form>
         </section>
 
         <section id="about" class="about">
-            <h2>О проекте</h2>
-            <p>РецептБокс — это учебный проект, который помогает выбрать блюдо по времени и сложности.</p>
+            <h2 class="section-title">О проекте</h2>
+            <p>РецептБокс — учебный проект, который помогает выбрать блюдо по времени и сложности.</p>
         </section>
     </main>
 
