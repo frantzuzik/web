@@ -1,12 +1,16 @@
 :root {
-    --color-bg: #faf7f2;
-    --color-text: #2c2c2c;
-    --color-muted: #777;
-    --color-accent: #e67e22;
-    --color-card: #ffffff;
-    --spacing: 1.5rem;
-    --radius: 12px;
-    --max-width: 1200px;
+    --bg: #f6f1e9;
+    --surface: #fffdf9;
+    --ink: #221f1c;
+    --ink-soft: #6b625a;
+    --line: #e4dccf;
+    --accent: #c1543a;
+    --accent-soft: #f0d9d1;
+    --radius: 14px;
+    --gap: 1.5rem;
+    --max: 1180px;
+    --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 * {
@@ -15,212 +19,389 @@
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    background: var(--color-bg);
-    color: var(--color-text);
-    line-height: 1.5;
+    font-family: var(--sans);
+    color: var(--ink);
+    line-height: 1.6;
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(circle at 12% 8%, rgba(193, 84, 58, 0.06), transparent 45%),
+        radial-gradient(circle at 88% 0%, rgba(107, 98, 90, 0.05), transparent 40%);
+    background-attachment: fixed;
+}
+
+/* ---------- Общие утилиты ---------- */
+
+.eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.section-head {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.section-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+    letter-spacing: -0.01em;
+}
+
+.section-sub {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin-top: 0.4rem;
 }
 
 /* ---------- Шапка ---------- */
+
 .header {
-    background: #fff;
-    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(246, 241, 233, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
 }
 
 .header__inner {
-    max-width: var(--max-width);
+    max-width: var(--max);
     margin: 0 auto;
-    padding: 1rem var(--spacing);
+    padding: 1rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .logo {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--color-accent);
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.logo::after {
+    content: ".";
+    color: var(--accent);
 }
 
 .nav-list {
     display: flex;
-    gap: 1.25rem;
+    gap: 1.75rem;
     list-style: none;
 }
 
 .nav-list a {
-    color: var(--color-text);
+    position: relative;
+    color: var(--ink-soft);
     text-decoration: none;
-    font-weight: 500;
+    font-size: 0.95rem;
+    padding-bottom: 2px;
+    transition: color 0.2s ease;
+}
+
+.nav-list a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
 }
 
 .nav-list a:hover {
-    color: var(--color-accent);
+    color: var(--ink);
+}
+
+.nav-list a:hover::after {
+    transform: scaleX(1);
 }
 
 /* ---------- Hero ---------- */
+
 .hero {
-    max-width: 800px;
+    padding: 5rem 1.5rem 4rem;
+}
+
+.hero__inner {
+    max-width: 720px;
     margin: 0 auto;
-    padding: 3rem var(--spacing) 2rem;
     text-align: center;
 }
 
 .hero h1 {
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    margin-bottom: 0.75rem;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2rem, 5.5vw, 3.4rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
 }
 
-.hero p {
-    color: var(--color-muted);
+.hero__lead {
+    color: var(--ink-soft);
     font-size: 1.05rem;
-}
-
-/* ---------- Заголовки секций ---------- */
-.section-title {
-    text-align: center;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    max-width: 56ch;
+    margin: 0 auto;
 }
 
 /* ---------- Карточки ---------- */
+
 .recipes {
-    max-width: var(--max-width);
+    max-width: var(--max);
     margin: 0 auto;
-    padding: 2rem var(--spacing);
+    padding: 3rem 1.5rem 4rem;
 }
 
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: var(--spacing);
+    gap: var(--gap);
 }
 
 .card {
-    background: var(--color-card);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     display: flex;
     flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.25s ease, transform 0.25s ease;
 }
 
-.card img {
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+}
+
+.card__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--accent-soft);
+}
+
+.card__media img {
     width: 100%;
-    height: 180px;
+    height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card__media img {
+    transform: scale(1.05);
+}
+
+.card__tag {
+    position: absolute;
+    left: 0.75rem;
+    bottom: 0.75rem;
+    padding: 0.25rem 0.7rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(255, 253, 249, 0.92);
+    color: var(--ink);
+    border-radius: 999px;
 }
 
 .card__body {
-    padding: var(--spacing);
+    padding: 1.25rem 1.25rem 1.4rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    flex: 1;
 }
 
 .card__body h3 {
-    font-size: 1.15rem;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.2rem;
+    letter-spacing: -0.01em;
 }
 
 .card__body p {
-    color: var(--color-muted);
-    font-size: 0.95rem;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    flex: 1;
 }
 
 .card-props {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
     list-style: none;
     margin-top: 0.5rem;
-    font-size: 0.9rem;
-    color: #555;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+}
+
+.card-props li {
+    font-size: 0.78rem;
+    padding: 0.2rem 0.65rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink-soft);
 }
 
 /* ---------- Форма ---------- */
+
 .search {
-    max-width: 500px;
+    padding: 1rem 1.5rem 4rem;
+}
+
+.search__inner {
+    max-width: 920px;
     margin: 0 auto;
-    padding: 2rem var(--spacing);
+    padding: 2.5rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
 }
 
 .search-form {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-end;
     gap: 1rem;
-    background: #fff;
-    padding: var(--spacing);
-    border-radius: var(--radius);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .form-field {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
+    flex: 1 1 180px;
+    min-width: 0;
+}
+
+.form-field--grow {
+    flex: 2 1 240px;
 }
 
 .form-field label {
-    font-size: 0.9rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
     font-weight: 600;
 }
 
 .search-form input,
 .search-form select {
-    padding: 0.75rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    font-size: 0.98rem;
     font-family: inherit;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    transition: border-color 0.2s ease;
+}
+
+.search-form input:hover,
+.search-form select:hover {
+    border-color: #cfc4b3;
 }
 
 .search-form button {
-    padding: 0.85rem;
-    font-size: 1rem;
+    flex: 0 0 auto;
+    padding: 0.8rem 1.75rem;
+    font-size: 0.95rem;
     font-weight: 600;
-    background: var(--color-accent);
+    font-family: inherit;
     color: #fff;
-    border: none;
-    border-radius: 8px;
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .search-form button:hover {
-    background: #cf6a12;
+    background: #a8452f;
+    border-color: #a8452f;
 }
 
 /* ---------- О проекте ---------- */
+
 .about {
-    max-width: 800px;
+    padding: 2rem 1.5rem 5rem;
+}
+
+.about__inner {
+    max-width: 640px;
     margin: 0 auto;
-    padding: 2rem var(--spacing) 3rem;
     text-align: center;
 }
 
-.about p {
-    color: var(--color-muted);
+.about__inner p {
+    color: var(--ink-soft);
+    margin-top: 1rem;
 }
 
 /* ---------- Подвал ---------- */
+
 .footer {
-    padding: var(--spacing);
-    text-align: center;
-    font-size: 0.9rem;
-    color: var(--color-muted);
-    border-top: 1px solid #eee;
-    background: #fff;
+    padding: 2rem 1.5rem;
+    border-top: 1px solid var(--line);
 }
 
-/* ---------- Фокус ---------- */
+.footer__note {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+}
+
+/* ---------- Фокус для клавиатуры ---------- */
+
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 select:focus-visible {
-    outline: 3px solid var(--color-accent);
-    outline-offset: 2px;
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+/* ---------- Адаптив ---------- */
+
+@media (max-width: 600px) {
+    .hero {
+        padding: 3.5rem 1.25rem 3rem;
+    }
+
+    .header__inner {
+        justify-content: center;
+    }
+
+    .nav-list {
+        gap: 1.25rem;
+    }
+
+    .search-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-form button {
+        width: 100%;
+    }
 }
