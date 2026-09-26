@@ -8,30 +8,64 @@
 </head>
 <body>
 
-    <header class="header">
-        <div class="header__inner">
-            <a href="#" class="logo">Cook&nbsp;Book</a>
-            <nav class="nav" aria-label="Основная навигация">
-                <ul class="nav-list">
-                    <li><a href="#recipes">Рецепты</a></li>
-                    <li><a href="#search">Поиск</a></li>
-                    <li><a href="#about">О проекте</a></li>
-                </ul>
-            </nav>
-        </div>
+    <header class="masthead">
+        <nav class="nav nav--left" aria-label="Основное меню">
+            <ul>
+                <li><a href="#recipes">Рецепты</a></li>
+                <li><a href="#search">Поиск</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="logo">Cook&nbsp;Book</a>
+        <nav class="nav nav--right" aria-label="Дополнительное меню">
+            <ul>
+                <li><a href="#about">О проекте</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
 
         <section class="hero">
-            <div class="hero__inner">
-                <p class="eyebrow">Кулинарная книга</p>
+            <div class="hero__text">
+                <p class="eyebrow">Кулинарная книга · выпуск 01</p>
                 <h1>Рецепты, которые хочется готовить</h1>
                 <p class="hero__lead">
                     Проверенные блюда с указанием времени, сложности и кухни.
-                    Выбирайте по настроению — от быстрого завтрака до воскресного ужина.
+                    От быстрого завтрака до воскресного ужина — выбирайте по настроению.
                 </p>
             </div>
+            <div class="hero__mark" aria-hidden="true">01</div>
+        </section>
+
+        <section id="search" class="toolbar">
+            <form class="toolbar__form">
+                <div class="field field--grow">
+                    <label for="query">Что ищем</label>
+                    <input type="text" id="query" name="query" placeholder="Название или ингредиент">
+                </div>
+
+                <div class="field">
+                    <label for="time">Время</label>
+                    <select id="time" name="time">
+                        <option value="">Любое</option>
+                        <option value="20">До 20 минут</option>
+                        <option value="40">20–40 минут</option>
+                        <option value="60">Больше 40 минут</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="difficulty">Сложность</label>
+                    <select id="difficulty" name="difficulty">
+                        <option value="">Любая</option>
+                        <option value="easy">Лёгкая</option>
+                        <option value="medium">Средняя</option>
+                        <option value="hard">Сложная</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="toolbar__submit">Найти</button>
+            </form>
         </section>
 
         <section id="recipes" class="recipes">
@@ -42,14 +76,14 @@
 
             <div class="cards">
 
-                <article class="card">
+                <article class="card card--featured">
                     <div class="card__media">
                         <img src="assets/images/carbonara.jpg" alt="Паста карбонара">
-                        <span class="card__tag">Итальянская</span>
                     </div>
                     <div class="card__body">
+                        <p class="card__cuisine">Итальянская</p>
                         <h3>Паста карбонара</h3>
-                        <p>Классика итальянской кухни: спагетти, гуанчиале и яичный соус.</p>
+                        <p>Классика итальянской кухни: спагетти, гуанчиале и яичный соус с пекорино.</p>
                         <ul class="card-props">
                             <li>25 мин</li>
                             <li>Средняя</li>
@@ -60,9 +94,9 @@
                 <article class="card">
                     <div class="card__media">
                         <img src="assets/images/tom-yam.jpg" alt="Том Ям">
-                        <span class="card__tag">Тайская</span>
                     </div>
                     <div class="card__body">
+                        <p class="card__cuisine">Тайская</p>
                         <h3>Том Ям</h3>
                         <p>Острый суп с креветками, кокосовым молоком и лемонграссом.</p>
                         <ul class="card-props">
@@ -75,11 +109,11 @@
                 <article class="card">
                     <div class="card__media">
                         <img src="assets/images/shakshuka.jpg" alt="Шакшука">
-                        <span class="card__tag">Ближневосточная</span>
                     </div>
                     <div class="card__body">
+                        <p class="card__cuisine">Ближневосточная</p>
                         <h3>Шакшука</h3>
-                        <p>Яйца, запечённые в пряном томатном соусе с болгарским перцем.</p>
+                        <p>Яйца, запечённые в пряном томатном соусе.</p>
                         <ul class="card-props">
                             <li>20 мин</li>
                             <li>Лёгкая</li>
@@ -90,9 +124,9 @@
                 <article class="card">
                     <div class="card__media">
                         <img src="assets/images/pancakes.jpg" alt="Панкейки">
-                        <span class="card__tag">Американская</span>
                     </div>
                     <div class="card__body">
+                        <p class="card__cuisine">Американская</p>
                         <h3>Панкейки</h3>
                         <p>Пышные оладьи на кефире — идеальный завтрак выходного дня.</p>
                         <ul class="card-props">
@@ -105,9 +139,9 @@
                 <article class="card">
                     <div class="card__media">
                         <img src="assets/images/borscht.jpg" alt="Борщ">
-                        <span class="card__tag">Восточноевропейская</span>
                     </div>
                     <div class="card__body">
+                        <p class="card__cuisine">Восточноевропейская</p>
                         <h3>Борщ</h3>
                         <p>Наваристый суп со свёклой, капустой и говядиной на кости.</p>
                         <ul class="card-props">
@@ -120,9 +154,9 @@
                 <article class="card">
                     <div class="card__media">
                         <img src="assets/images/tiramisu.jpg" alt="Тирамису">
-                        <span class="card__tag">Итальянская</span>
                     </div>
                     <div class="card__body">
+                        <p class="card__cuisine">Итальянская</p>
                         <h3>Тирамису</h3>
                         <p>Десерт без выпечки: маскарпоне, савоярди и крепкий кофе.</p>
                         <ul class="card-props">
@@ -135,61 +169,31 @@
             </div>
         </section>
 
-        <section id="search" class="search">
-            <div class="search__inner">
-                <div class="section-head">
-                    <h2 class="section-title">Найти рецепт</h2>
-                    <p class="section-sub">Сейчас форма только выглядит рабочей — поиск появится позже.</p>
+        <section id="about" class="colophon">
+            <div class="colophon__grid">
+                <div class="colophon__title">
+                    <p class="eyebrow">О проекте</p>
+                    <h2 class="section-title">Зачем это всё</h2>
                 </div>
-
-                <form class="search-form">
-                    <div class="form-field form-field--grow">
-                        <label for="query">Название или ингредиент</label>
-                        <input type="text" id="query" name="query" placeholder="Например, паста">
-                    </div>
-
-                    <div class="form-field">
-                        <label for="time">Время приготовления</label>
-                        <select id="time" name="time">
-                            <option value="">Любое</option>
-                            <option value="20">До 20 минут</option>
-                            <option value="40">20–40 минут</option>
-                            <option value="60">Больше 40 минут</option>
-                        </select>
-                    </div>
-
-                    <div class="form-field">
-                        <label for="difficulty">Сложность</label>
-                        <select id="difficulty" name="difficulty">
-                            <option value="">Любая</option>
-                            <option value="easy">Лёгкая</option>
-                            <option value="medium">Средняя</option>
-                            <option value="hard">Сложная</option>
-                        </select>
-                    </div>
-
-                    <button type="submit">Найти</button>
-                </form>
-            </div>
-        </section>
-
-        <section id="about" class="about">
-            <div class="about__inner">
-                <p class="eyebrow">О проекте</p>
-                <h2 class="section-title">Зачем это всё</h2>
-                <p>
-                    Cook Book — учебный проект, который постепенно превратится
-                    в полноценное приложение с поиском, личными подборками и своими рецептами.
-                    Пока это статическая страница: данные лежат прямо в HTML,
-                    но структура уже готова к следующему этапу.
-                </p>
+                <div class="colophon__text">
+                    <p>
+                        Cook Book — учебный проект, который постепенно превратится
+                        в полноценное приложение с поиском, личными подборками
+                        и своими рецептами.
+                    </p>
+                    <p>
+                        Пока это статическая страница: данные лежат прямо в HTML,
+                        но структура уже готова к следующему этапу — JavaScript,
+                        серверу и базе данных.
+                    </p>
+                </div>
             </div>
         </section>
 
     </main>
 
     <footer class="footer">
-        <p class="footer__note">Cook Book · изображения: Unsplash, Pexels</p>
+        <p>Cook Book · изображения: Unsplash, Pexels</p>
     </footer>
 
 </body>
