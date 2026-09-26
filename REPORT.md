@@ -31,19 +31,17 @@ Cook Book — каталог рецептов. Объект коллекции �
 
 ## 2. Структура проекта
 cook-book/
-    index.html
-    styles/
-        main.css
-    assets/
-        images/
-            carbonara.jpg
-            tom-yam.jpg
-            shakshuka.jpg
-            pancakes.jpg
-            borscht.jpg
-            tiramisu.jpg
-    REPORT.md
-    README.md
+
+- index.html
+- styles/main.css
+- assets/images/carbonara.jpg
+- assets/images/tom-yam.jpg
+- assets/images/shakshuka.jpg
+- assets/images/pancakes.jpg
+- assets/images/borscht.jpg
+- assets/images/tiramisu.jpg
+- README.md
+- REPORT.md
 
 
 Файл index.html — единственная страница приложения. Все стили вынесены в отдельный файл styles/main.css и подключены через тег link с атрибутом rel="stylesheet". Изображения блюд лежат в папке assets/images и подключены относительными путями. Файл README.md содержит описание проекта. REPORT.md — этот отчёт.
