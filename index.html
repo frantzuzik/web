@@ -1,1 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>РецептБокс — рецепты на каждый день</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
 
+    <header class="header">
+        <div class="logo">РецептБокс</div>
+        <nav class="nav">
+            <ul class="nav-list">
+                <li><a href="#recipes">Рецепты</a></li>
+                <li><a href="#search">Поиск</a></li>
+                <li><a href="#about">О проекте</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Рецепты на каждый день</h1>
+            <p>Собрание проверенных блюд с указанием времени, сложности и ингредиентов.</p>
+        </section>
+
+        <section id="recipes" class="recipes">
+            <h2>Каталог рецептов</h2>
+            <div class="cards">
+                <article class="card">
+                    <img src="assets/images/carbonara.jpg" alt="Паста карбонара">
+                    <h3>Паста карбонара</h3>
+                    <p>Классика итальянской кухни.</p>
+                    <ul class="card-props">
+                        <li>Время: 25 мин</li>
+                        <li>Сложность: средняя</li>
+                        <li>Кухня: итальянская</li>
+                    </ul>
+                </article>
+                <!-- ещё 5 карточек -->
+            </div>
+        </section>
+
+        <section id="search" class="search">
+            <h2>Найти рецепт</h2>
+            <form class="search-form">
+                <label for="query">Название или ингредиент</label>
+                <input type="text" id="query" name="query" placeholder="Например, паста">
+
+                <label for="time">Время приготовления</label>
+                <select id="time" name="time">
+                    <option value="">Любое</option>
+                    <option value="20">До 20 минут</option>
+                    <option value="40">20–40 минут</option>
+                    <option value="60">Больше 40 минут</option>
+                </select>
+
+                <button type="submit">Найти рецепт</button>
+            </form>
+        </section>
+
+        <section id="about" class="about">
+            <h2>О проекте</h2>
+            <p>РецептБокс — это учебный проект, который помогает выбрать блюдо по времени и сложности.</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 РецептБокс</p>
+        <p>Изображения: Unsplash, Pexels</p>
+    </footer>
+
+</body>
+</html>
