@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cook Book — рецепты на каждый день</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -21,115 +21,43 @@
     </header>
 
     <main>
-
         <section class="hero container">
             <h1>Рецепты на каждый день</h1>
             <p>Проверенные блюда с указанием времени, сложности и кухни.</p>
         </section>
 
-        <section id="recipes" class="container">
-            <h2>Каталог рецептов</h2>
-
-            <div class="cards">
-
-                <article class="card">
-                    <img src="assets/images/carbonara.jpg" alt="Паста карбонара">
-                    <div class="card__body">
-                        <h3>Паста карбонара</h3>
-                        <p>Классика итальянской кухни.</p>
-                        <ul class="card-props">
-                            <li>25 мин</li>
-                            <li>Средняя</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <img src="assets/images/tom-yam.jpg" alt="Том Ям">
-                    <div class="card__body">
-                        <h3>Том Ям</h3>
-                        <p>Острый тайский суп с креветками.</p>
-                        <ul class="card-props">
-                            <li>40 мин</li>
-                            <li>Сложная</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <img src="assets/images/shakshuka.jpg" alt="Шакшука">
-                    <div class="card__body">
-                        <h3>Шакшука</h3>
-                        <p>Яйца в пряном томатном соусе.</p>
-                        <ul class="card-props">
-                            <li>20 мин</li>
-                            <li>Лёгкая</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <img src="assets/images/pancakes.jpg" alt="Панкейки">
-                    <div class="card__body">
-                        <h3>Панкейки</h3>
-                        <p>Пышные оладьи на завтрак.</p>
-                        <ul class="card-props">
-                            <li>15 мин</li>
-                            <li>Лёгкая</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <img src="assets/images/borscht.jpg" alt="Борщ">
-                    <div class="card__body">
-                        <h3>Борщ</h3>
-                        <p>Наваристый суп со свёклой.</p>
-                        <ul class="card-props">
-                            <li>90 мин</li>
-                            <li>Средняя</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <img src="assets/images/tiramisu.jpg" alt="Тирамису">
-                    <div class="card__body">
-                        <h3>Тирамису</h3>
-                        <p>Десерт без выпечки.</p>
-                        <ul class="card-props">
-                            <li>30 мин</li>
-                            <li>Средняя</li>
-                        </ul>
-                    </div>
-                </article>
-
-            </div>
-        </section>
-
         <section id="search" class="container">
-            <h2>Найти рецепт</h2>
-
-            <form class="search-form">
-                <div class="field">
-                    <label for="query">Название или ингредиент</label>
-                    <input type="text" id="query" name="query" placeholder="Например, паста">
+            <div class="controls">
+                <div class="field field--grow">
+                    <label for="query">Поиск</label>
+                    <input type="text" id="query" placeholder="Название или ингредиент">
                 </div>
 
                 <div class="field">
-                    <label for="time">Время приготовления</label>
-                    <select id="time" name="time">
-                        <option value="">Любое</option>
-                        <option value="20">До 20 минут</option>
-                        <option value="40">20–40 минут</option>
-                        <option value="60">Больше 40 минут</option>
+                    <label for="category">Кухня</label>
+                    <select id="category">
+                        <option value="all">Все кухни</option>
                     </select>
                 </div>
 
-                <button type="submit">Найти</button>
-            </form>
+                <div class="field">
+                    <label for="sort">Сортировка</label>
+                    <select id="sort">
+                        <option value="name-asc">Название А–Я</option>
+                        <option value="name-desc">Название Я–А</option>
+                        <option value="time-asc">Сначала быстро</option>
+                        <option value="time-desc">Сначала долго</option>
+                    </select>
+                </div>
+
+                <button type="button" id="add-btn" class="btn btn--primary">Добавить рецепт</button>
+            </div>
         </section>
 
+        <section id="recipes" class="container">
+            <h2>Каталог рецептов</h2>
+            <div class="cards" id="cards"></div>
+        </section>
     </main>
 
     <footer class="footer">
@@ -138,5 +66,64 @@
         </div>
     </footer>
 
+    <!-- Модальное окно -->
+    <div class="modal" id="modal" aria-hidden="true">
+        <div class="modal__backdrop" data-close></div>
+        <div class="modal__window" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <button class="modal__close" type="button" data-close aria-label="Закрыть">×</button>
+            <h2 id="modal-title">Добавить рецепт</h2>
+
+            <form id="add-form" novalidate>
+                <div class="field">
+                    <label for="new-title">Название</label>
+                    <input type="text" id="new-title" name="title" required minlength="2" maxlength="60">
+                    <p class="error" id="new-title-error"></p>
+                </div>
+
+                <div class="field">
+                    <label for="new-description">Описание</label>
+                    <textarea id="new-description" name="description" required minlength="10" maxlength="200" rows="3"></textarea>
+                    <p class="error" id="new-description-error"></p>
+                </div>
+
+                <div class="field">
+                    <label for="new-time">Время (мин)</label>
+                    <input type="number" id="new-time" name="time" required min="1" max="600">
+                    <p class="error" id="new-time-error"></p>
+                </div>
+
+                <div class="field">
+                    <label for="new-difficulty">Сложность</label>
+                    <select id="new-difficulty" name="difficulty" required>
+                        <option value="">Выберите сложность</option>
+                        <option value="Лёгкая">Лёгкая</option>
+                        <option value="Средняя">Средняя</option>
+                        <option value="Сложная">Сложная</option>
+                    </select>
+                    <p class="error" id="new-difficulty-error"></p>
+                </div>
+
+                <div class="field">
+                    <label for="new-cuisine">Кухня</label>
+                    <input type="text" id="new-cuisine" name="cuisine" required minlength="3" maxlength="40" list="cuisines-list">
+                    <datalist id="cuisines-list"></datalist>
+                    <p class="error" id="new-cuisine-error"></p>
+                </div>
+
+                <div class="field">
+                    <label for="new-image">Ссылка на изображение (необязательно)</label>
+                    <input type="url" id="new-image" name="image" placeholder="https://...">
+                    <p class="error" id="new-image-error"></p>
+                </div>
+
+                <div class="modal__actions">
+                    <button type="button" class="btn btn--ghost" data-close>Отмена</button>
+                    <button type="submit" class="btn btn--primary">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app.js" defer></script>
 </body>
 </html>
