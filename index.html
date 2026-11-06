@@ -23,106 +23,103 @@
     <main>
         <section class="hero container">
             <h1>Рецепты на каждый день</h1>
-            <p>Проверенные блюда с указанием времени, сложности и кухни.</p>
-        </section>
-
-        <section id="search" class="container">
-            <div class="controls">
-                <div class="field field--grow">
-                    <label for="query">Поиск</label>
-                    <input type="text" id="query" placeholder="Название или ингредиент">
-                </div>
-
-                <div class="field">
-                    <label for="category">Кухня</label>
-                    <select id="category">
-                        <option value="all">Все кухни</option>
-                    </select>
-                </div>
-
-                <div class="field">
-                    <label for="sort">Сортировка</label>
-                    <select id="sort">
-                        <option value="name-asc">Название А–Я</option>
-                        <option value="name-desc">Название Я–А</option>
-                        <option value="time-asc">Сначала быстро</option>
-                        <option value="time-desc">Сначала долго</option>
-                    </select>
-                </div>
-
-                <button type="button" id="add-btn" class="btn btn--primary">Добавить рецепт</button>
-            </div>
+            <p>Проверенные блюда с указанием времени, сложности и кухни. Данные загружаются с backend по REST API.</p>
         </section>
 
         <section id="recipes" class="container">
-            <h2>Каталог рецептов</h2>
+            <div class="section-head">
+                <h2>Каталог рецептов</h2>
+                <button type="button" class="btn btn--primary" id="open-modal">+ Добавить рецепт</button>
+            </div>
+
+            <div id="search" class="controls">
+                <div class="field">
+                    <label for="query">Поиск</label>
+                    <input type="text" id="query" placeholder="Название или ингредиент" autocomplete="off">
+                </div>
+                <div class="field">
+                    <label for="filter-cuisine">Кухня</label>
+                    <select id="filter-cuisine"><option value="all">Все кухни</option></select>
+                </div>
+                <div class="field">
+                    <label for="sort">Сортировка</label>
+                    <select id="sort">
+                        <option value="name-asc">Название: А–Я</option>
+                        <option value="name-desc">Название: Я–А</option>
+                        <option value="time-asc">Время: сначала быстрые</option>
+                        <option value="time-desc">Время: сначала долгие</option>
+                    </select>
+                </div>
+            </div>
+
+            <p class="results" id="results" aria-live="polite"></p>
             <div class="cards" id="cards"></div>
         </section>
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <p>Cook Book · изображения: Unsplash, Pexels</p>
-        </div>
+        <div class="container"><p>Cook Book · backend: FastAPI</p></div>
     </footer>
 
-    <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal" id="modal" hidden>
         <div class="modal__backdrop" data-close></div>
-        <div class="modal__window" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-            <button class="modal__close" type="button" data-close aria-label="Закрыть">×</button>
-            <h2 id="modal-title">Добавить рецепт</h2>
+        <div class="modal__dialog" role="dialog" aria-modal="true">
+            <div class="modal__head">
+                <h2 id="modal-title">Новый рецепт</h2>
+                <button type="button" class="modal__close" data-close aria-label="Закрыть">×</button>
+            </div>
 
-            <form id="add-form" novalidate>
+            <form id="recipe-form" class="form" novalidate>
                 <div class="field">
-                    <label for="new-title">Название</label>
-                    <input type="text" id="new-title" name="title" required minlength="2" maxlength="60">
-                    <p class="error" id="new-title-error"></p>
+                    <label for="name">Название</label>
+                    <input type="text" id="name" name="name" required minlength="2" maxlength="200">
+                    <p class="error" role="alert"></p>
+                </div>
+                <div class="field">
+                    <label for="description">Описание</label>
+                    <textarea id="description" name="description" rows="2" maxlength="1000"></textarea>
+                    <p class="error" role="alert"></p>
+                </div>
+                <div class="form__row">
+                    <div class="field">
+                        <label for="time">Время, мин</label>
+                        <input type="number" id="time" name="time_minutes" required min="1" max="600">
+                        <p class="error" role="alert"></p>
+                    </div>
+                    <div class="field">
+                        <label for="difficulty">Сложность</label>
+                        <select id="difficulty" name="difficulty" required>
+                            <option value="">Выберите…</option>
+                            <option value="Лёгкая">Лёгкая</option>
+                            <option value="Средняя">Средняя</option>
+                            <option value="Сложная">Сложная</option>
+                        </select>
+                        <p class="error" role="alert"></p>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="cuisine">Кухня</label>
+                    <input type="text" id="cuisine" name="cuisine" required minlength="1" maxlength="100"
+                           list="cuisine-options" placeholder="Итальянская">
+                    <datalist id="cuisine-options"></datalist>
+                    <p class="error" role="alert"></p>
+                </div>
+                <div class="field">
+                    <label for="image_url">Ссылка на изображение</label>
+                    <input type="text" id="image_url" name="image_url" maxlength="500">
+                    <p class="error" role="alert"></p>
                 </div>
 
-                <div class="field">
-                    <label for="new-description">Описание</label>
-                    <textarea id="new-description" name="description" required minlength="10" maxlength="200" rows="3"></textarea>
-                    <p class="error" id="new-description-error"></p>
-                </div>
-
-                <div class="field">
-                    <label for="new-time">Время (мин)</label>
-                    <input type="number" id="new-time" name="time" required min="1" max="600">
-                    <p class="error" id="new-time-error"></p>
-                </div>
-
-                <div class="field">
-                    <label for="new-difficulty">Сложность</label>
-                    <select id="new-difficulty" name="difficulty" required>
-                        <option value="">Выберите сложность</option>
-                        <option value="Лёгкая">Лёгкая</option>
-                        <option value="Средняя">Средняя</option>
-                        <option value="Сложная">Сложная</option>
-                    </select>
-                    <p class="error" id="new-difficulty-error"></p>
-                </div>
-
-                <div class="field">
-                    <label for="new-cuisine">Кухня</label>
-                    <input type="text" id="new-cuisine" name="cuisine" required minlength="3" maxlength="40" list="cuisines-list">
-                    <datalist id="cuisines-list"></datalist>
-                    <p class="error" id="new-cuisine-error"></p>
-                </div>
-
-                <div class="field">
-                    <label for="new-image">Ссылка на изображение (необязательно)</label>
-                    <input type="url" id="new-image" name="image" placeholder="https://...">
-                    <p class="error" id="new-image-error"></p>
-                </div>
+                <p class="form-error" id="form-error" role="alert"></p>
 
                 <div class="modal__actions">
-                    <button type="button" class="btn btn--ghost" data-close>Отмена</button>
-                    <button type="submit" class="btn btn--primary">Добавить</button>
+                    <button type="button" class="btn" data-close>Отмена</button>
+                    <button type="submit" class="btn btn--primary" id="form-submit">Добавить</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <script src="js/app.js" defer></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
