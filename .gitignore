@@ -1,15 +1,15 @@
 # Python
-backend/.venv/
 __pycache__/
-*.pyc
-.env
+*.py[cod]
+.venv/
+venv/
 
-# База данных
-backend/cookbook.db
-*.sqlite3
+# Database
 *.db
+*.sqlite3
+cookbook.db
 
-# ОС / IDE
+# OS / Editor
 .DS_Store
-.idea/
 .vscode/
+.idea/
