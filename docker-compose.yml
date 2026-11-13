@@ -1,1 +1,49 @@
+version: '3.8'
 
+services:
+  # 1. Ваше приложение Cook Book
+  webapp:
+    build: .  # Собирает образ из Dockerfile в текущей папке
+    container_name: cookbook-app
+    ports:
+      - "8000:8000" # Сайт и API будут на http://localhost:8000
+    volumes:
+      - ./backend/cookbook.db:/app/backend/cookbook.db # Сохраняем базу данных на компьютере
+    restart: unless-stopped
+
+  # 2. cAdvisor (Сборщик метрик)
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    privileged: true # Даем права на чтение системных метрик
+    devices:
+      - /dev/kmsg
+    restart: unless-stopped
+
+  # 3. Prometheus (Хранилище метрик)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml # Подключаем наш конфиг
+    restart: unless-stopped
+
+  # 4. Grafana (Визуализация)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin # Пароль по умолчанию
+    restart: unless-stopped
