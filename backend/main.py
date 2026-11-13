@@ -290,3 +290,18 @@ async def delete_cuisine(cuisine_id: int, db: AsyncSession = Depends(get_db)):
     except IntegrityError:
         await db.rollback()
         raise HTTPException(status_code=409, detail="Cannot delete cuisine: used by recipes")
+# ==========================================
+# 7. РАЗДАЧА ФРОНТЕНДА (Статика)
+# ==========================================
+# Находим путь к корневой папке (на уровень выше папки backend)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Подключаем папки со стилями, скриптами и картинками
+app.mount("/css", StaticFiles(directory=os.path.join(BASE_DIR, "css")), name="css")
+app.mount("/js", StaticFiles(directory=os.path.join(BASE_DIR, "js")), name="js")
+app.mount("/assets", StaticFiles(directory=os.path.join(BASE_DIR, "assets")), name="assets")
+
+# При заходе на главную страницу отдаем index.html
+@app.get("/", include_in_schema=False)
+async def read_index():
+    return FileResponse(os.path.join(BASE_DIR, "index.html"))
