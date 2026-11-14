@@ -8,7 +8,7 @@ services:
     ports:
       - "8000:8000" # Сайт и API будут на http://localhost:8000
     volumes:
-      - ./backend/cookbook.db:/app/backend/cookbook.db # Сохраняем базу данных на компьютере
+      - ./data:/app/backend/data # Сохраняем базу данных на компьютере
     restart: unless-stopped
 
   # 2. cAdvisor (Сборщик метрик)
