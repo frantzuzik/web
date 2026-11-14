@@ -114,7 +114,7 @@ docker compose up -d --build
 - В разделе **Status → Targets** проверен target `cadvisor`. Статус: **UP** (зеленый).
 - На главной странице в поле запроса введена метрика `container_cpu_usage_seconds_total`. Prometheus успешно выводит данные о потреблении CPU.
 
-[[fff]]
+
 
 
 ### 4. Подключение Grafana к Prometheus
