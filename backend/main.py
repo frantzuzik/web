@@ -19,7 +19,9 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 # ==========================================
 # 1. БАЗА ДАННЫХ (SQLite)
 # ==========================================
-DATABASE_URL = "sqlite+aiosqlite:///./cookbook.db"
+import os
+os.makedirs("data", exist_ok=True)
+DATABASE_URL = "sqlite+aiosqlite:///./data/cookbook.db"
 engine = create_async_engine(DATABASE_URL, echo=False, future=True)
 SessionLocal = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
