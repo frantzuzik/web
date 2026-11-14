@@ -135,15 +135,15 @@ sum(rate(container_cpu_usage_seconds_total{name="cookbook-app"}[5m])) * 100
 
 В результате на дашборде Grafana в реальном времени наблюдался резкий всплеск (spike) на графиках **CPU Usage** и **Memory Usage** для контейнера `cookbook-app`. После прекращения нагрузки метрики вернулись к исходным значениям.
 ### 7. Скриншоты
-![[folder/1.png]]
+![Скриншот docker ps](folder/1.png)
 
-![[folder/2.png]]
+![Скриншот docker ps](folder/2.png)
 
-![[folder/3.png]]
+![Скриншот docker ps](folder/3.png)
 
-![[folder/4.png]]
+![Скриншот docker ps](folder/4.png)
 
-![[folder/5.png]]
+![Скриншот docker ps](folder/5.png)
 
 ## Вывод
 В ходе лабораторной работы был успешно развернут стек мониторинга Docker-контейнеров. Приложение Cook Book было контейнеризировано. Связка cAdvisor + Prometheus + Grafana позволяет в реальном времени отслеживать потребление ресурсов (CPU, RAM, сеть) каждым отдельным контейнером, что критически важно для поддержания стабильности и оптимизации ресурсов в production-среде.
